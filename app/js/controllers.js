@@ -11,6 +11,7 @@ angular.module('myApp.controllers', []).
   }])
   .controller('mainCtrl', function ($scope, $http) {
     var url = '/rest/todo';
+    
     $http.get(url)
     .success(function(data, status){
       $scope.todos = data;
@@ -18,7 +19,7 @@ angular.module('myApp.controllers', []).
     .error(function(data, status){
       console.error('Error occured while retrieving todos list: '+data);
     });
-    //$scope.todos = ["First Item", "Second Item", "Third Item"];
+
     $scope.addTodo = function () {
     	$scope.todos.push($scope.todo);
     	$scope.todo = "";
