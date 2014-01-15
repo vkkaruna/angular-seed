@@ -9,8 +9,16 @@ angular.module('myApp.controllers', []).
   .controller('MyCtrl2', [function() {
 
   }])
-  .controller('mainCtrl', function ($scope) {
-    $scope.todos = ["First Item", "Second Item", "Third Item"];
+  .controller('mainCtrl', function ($scope, $http) {
+    var url = '/rest/todo';
+    $http.get(url)
+    .success(function(data, status){
+      $scope.todos = data;
+    })
+    .error(function(data, status){
+      console.error('Error occured while retrieving todos list: '+data);
+    });
+    //$scope.todos = ["First Item", "Second Item", "Third Item"];
     $scope.addTodo = function () {
     	$scope.todos.push($scope.todo);
     	$scope.todo = "";
